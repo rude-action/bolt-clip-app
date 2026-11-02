@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DL Clipper — a flexible and easy-to-use YouTube downloader</title>
+  <meta name="description" content="a flexible and easy-to-use YouTube downloader">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&family=Zen+Maru+Gothic:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <div class="hero">
+      <div class="logo-wrap">
+        <svg class="logo" width="76" height="76" viewBox="0 0 72 72" aria-hidden="true">
+          <defs>
+            <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#38bdf8"/>
+              <stop offset="1" stop-color="#0284c7"/>
+            </linearGradient>
+          </defs>
+          <rect x="4" y="4" width="64" height="64" rx="22" fill="url(#lg)"/>
+          <path d="M29 23 L51 36 L29 49 Z" fill="#fff"/>
+        </svg>
+      </div>
+      <h1 class="wordmark">DL Clipper</h1>
+      <p class="tagline">a flexible and easy-to-use YouTube downloader</p>
+    </div>
+
+    <section id="input-view">
+      <form id="url-form">
+        <input type="url" id="url-input" placeholder="paste YouTube URL" autocomplete="off" required>
+        <button type="submit" id="get-btn">
+          <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path fill="currentColor" d="M12 3v10.2l3.6-3.6 1.4 1.4-6 6-6-6 1.4-1.4 3.6 3.6V3h2Zm-7 15h14v2H5v-2Z"/></svg>
+          Download
+        </button>
+        <button type="button" id="paste-btn" class="ghost" title="クリップボードから貼り付け">📋 貼り付け</button>
+      </form>
+      <p id="input-error" class="error hidden"></p>
+    </section>
+
+    <section id="loading-view" class="hidden">
+      <div class="spinner"></div>
+      <p>動画情報を取得中…</p>
+    </section>
+
+    <section id="result-view" class="hidden">
+      <h2 id="video-title" class="selectable"></h2>
+      <button id="copy-title-btn" type="button" class="ghost hidden" title="タイトルをコピー">📋 タイトルをコピー</button>
+      <div class="columns">
+        <div class="col">
+          <div class="group-header">Video</div>
+          <div id="video-list"></div>
+        </div>
+        <div class="col">
+          <div class="group-header">Audio</div>
+          <div id="audio-list"></div>
+        </div>
+      </div>
+      <div class="single-group">
+        <div class="group-header">Video + audio · 単一ファイル</div>
+        <div id="muxed-list"></div>
+      </div>
+      <div class="action-row">
+        <button id="merge-btn" type="button">Download</button>
+        <span id="status-line"></span>
+      </div>
+      <div class="progress-track"><div id="progress-bar"></div></div>
+      <button id="another-btn" type="button" class="ghost">Download another</button>
+    </section>
+  </main>
+
+  <!-- 右下： ポリシー -->
+  <div class="corner right">
+    <button id="policy-btn" type="button">Privacy Policy</button>
+  </div>
+
+  <!-- プライバシーポリシー モーダル -->
+  <div id="policy-modal" class="hidden">
+    <div class="modal-card">
+      <h3>Privacy Policy</h3>
+      <p>当サイトのサーバーに送信される情報は、<strong>あなたがダウンロードしようとする動画のURLのみ</strong>です。</p>
+      <p>CookieはVercelが標準で提供するもの以外には設定せず、クロスサイトトラッキング、IPアドレスやフィンガープリントの記録、データの第三者への販売も一切行いません。</p>
+      <button id="policy-ok" type="button">Okay</button>
+    </div>
+  </div>
+
+  <!-- 右クリックコンテキストメニュー(コピー/切り取り/貼り付け)。
+       scriptより前に置くこと: client.jsの読み込み時に要素が存在する必要がある -->
+  <div id="ctx-menu" class="hidden">
+    <button data-act="cut" class="ctx-item">切り取り</button>
+    <button data-act="copy" class="ctx-item">コピー</button>
+    <button data-act="paste" class="ctx-item">貼り付け</button>
+    <button data-act="copyAll" class="ctx-item">すべてコピー</button>
+  </div>
+
+  <script src="remux.js"></script>
+  <script src="client.js"></script>
+</body>
+</html>
