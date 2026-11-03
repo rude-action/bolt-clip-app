@@ -1,0 +1,26 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "bolt-clip",
+  "outputfilename": "BoltClip",
+  "frontend:install": "",
+  "frontend:build": "",
+  "frontend:dev:watcher": "",
+  "frontend:dev:serverUrl": "auto",
+  "author": {
+    "name": "bolt-clip"
+  },
+  "info": {
+    "productName": "Bolt Clip",
+    "productVersion": "1.0.0",
+    "copyright": "Copyright (c) 2026",
+    "comments": "A flexible and easy-to-use YouTube downloader"
+  },
+  "nsis": {
+    "installerIcon": "build/windows/icon.ico",
+    "headerIcon": "build/windows/icon.ico",
+    "installDirectoryPicker": true,
+    "template": "",
+    "languages": ["English", "Japanese"],
+    "name": "Bolt Clip"
+  }
+}
